@@ -6,13 +6,49 @@ namespace AOC_2025_Test
     public sealed class SafeDialTest
     {
         [TestMethod]
-        public async Task ThinkAndGetSecuredPassword()
+        public void ThinkAndGetSecuredPasswordPartOne()
         {
             SafeDial safeDial = new SafeDial("DayOneTest.txt");
             
             int password = safeDial.ThinkAndFindPassword();
 
             Assert.IsTrue(3 == password, $"Did not think hard enough: {password}");
+        }
+
+        [TestMethod]
+        public void ThinkAndGetSecuredPasswordPartTwo()
+        {
+            SafeDial safeDial = new SafeDial("DayOneTest.txt", true);
+
+            int password = safeDial.ThinkAndFindPassword();
+
+            Assert.IsTrue(6 == password, $"Did not think hard enough: {password}");
+        }
+
+        [TestMethod]
+        public async Task PartTwoExtraRotationRightTest()
+        {
+            string tempFile = Path.GetTempFileName(); 
+            var lines = new[] { "R1000" };
+            await File.WriteAllLinesAsync(tempFile, lines);
+            SafeDial safeDial = new SafeDial(tempFile, true);
+
+            int password = safeDial.ThinkAndFindPassword();
+
+            Assert.IsTrue(10 == password, $"Did not think hard enough: {password}");
+        }
+
+        [TestMethod]
+        public async Task PartTwoExtraRotationLeftTest()
+        {
+            string tempFile = Path.GetTempFileName();
+            var lines = new[] { "L1000" };
+            await File.WriteAllLinesAsync(tempFile, lines);
+            SafeDial safeDial = new SafeDial(tempFile, true);
+
+            int password = safeDial.ThinkAndFindPassword();
+
+            Assert.IsTrue(10 == password, $"Did not think hard enough: {password}");
         }
 
         [TestMethod]

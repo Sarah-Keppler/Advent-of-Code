@@ -12,3 +12,9 @@ safeDial = new SafeDial("./DayOne/DayOne.txt", true);
 Console.WriteLine($"Using password method 0x434C49434B, what is the password to open the door? {safeDial.ThinkAndFindPassword()}\r\n");
 
 #endregion
+
+#region Day2
+
+Console.WriteLine("--- Day 2: Gift Shop ---\r\n");
+
+#endregion

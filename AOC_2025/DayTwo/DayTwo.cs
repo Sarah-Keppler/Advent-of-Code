@@ -1,6 +1,6 @@
 namespace AOC_2025.DayTwo
 {
-    public sealed class IDValidator
+    public sealed class DayTwo
     {
         #region Properties
 
@@ -10,7 +10,7 @@ namespace AOC_2025.DayTwo
 
         #region Constructors
 
-        public IDValidator(string fileName)
+        public DayTwo(string fileName)
         {
             var lines = File.ReadAllLines(fileName);
             _IdList = [.. lines[0].Split(',')];
@@ -25,7 +25,7 @@ namespace AOC_2025.DayTwo
             List<string> invalidIds = new List<string>();
             foreach (var id in _IdList)
             {
-                if (isLeadingZerosIds(id) || hasDoubleDigitsSequencePattern(id))
+                if (isLeadingZerosIds(id) || hasDoubleDigitsSequence(id))
                 {
                     invalidIds.Add(id);
                 }
@@ -35,11 +35,10 @@ namespace AOC_2025.DayTwo
 
         private bool isLeadingZerosIds(string id)
         {
-            return '0' == id[0] ||
-                '0' == id.Substring(id.IndexOf('-'))[0];
+            return '0' == id[0];
         }
 
-        private bool hasDoubleDigitsSequencePattern(string id)
+        private bool hasDoubleDigitsSequence(string id)
         {
             int idLength = id.Count();
             char lastChar = id[0];
@@ -54,13 +53,6 @@ namespace AOC_2025.DayTwo
             }
 
             return false;
-        }
-
-        private (int, int) getMinAndMaxRange(string id)
-        {
-            int indexOfDelimiter = id.IndexOf('-');
-            
-            return (Int32.Parse(id.Substring(0, indexOfDelimiter - 1)), Int32.Parse(id.Substring(indexOfDelimiter)));
         }
 
         #endregion

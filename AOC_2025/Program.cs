@@ -8,5 +8,7 @@ Console.WriteLine("Advent of Code 2025\n");
 Console.WriteLine("--- Day 1: Secret Entrance ---\r\n");
 SafeDial safeDial = new SafeDial("./DayOne/DayOne.txt");
 Console.WriteLine($"What's the actual password to open the door? {safeDial.ThinkAndFindPassword()}");
+safeDial = new SafeDial("./DayOne/DayOne.txt", true);
+Console.WriteLine($"Using password method 0x434C49434B, what is the password to open the door? {safeDial.ThinkAndFindPassword()}\r\n");
 
 #endregion

@@ -14,13 +14,16 @@ namespace AOC_2025.DayOne
 
         List<string> _FileContent;
         int _ZeroCounter = 0;
+        bool _PartTwo = false;
 
         #endregion
 
         #region Constructors
 
-        public SafeDial(string fileName) {
+        public SafeDial(string fileName, bool partTwo = false)
+        {
             _FileContent = File.ReadAllLines(fileName).ToList();
+            _PartTwo = partTwo;
         }
 
         #endregion
@@ -52,11 +55,19 @@ namespace AOC_2025.DayOne
 
             while (CurrentNumber - currentDistance < 0)
             {
+                if (_PartTwo && CurrentNumber != 0)
+                {
+                    _ZeroCounter++;
+                }
                 currentDistance -= CurrentNumber;
                 CurrentNumber = 100;
             }
 
             CurrentNumber -= currentDistance;
+            if (100 == CurrentNumber)
+            {
+                CurrentNumber = 0;
+            }
         }
 
         private void RotateRight(int distance)
@@ -65,6 +76,7 @@ namespace AOC_2025.DayOne
 
             while (CurrentNumber + currentDistance > 100)
             {
+
                 if (CurrentNumber == 0)
                 {
                     currentDistance -= 100;
@@ -73,6 +85,12 @@ namespace AOC_2025.DayOne
                     currentDistance -= 100 - CurrentNumber;
                 }
                 CurrentNumber = 0;
+
+
+                if (_PartTwo)
+                {
+                    _ZeroCounter++;
+                }
             }
 
             CurrentNumber += currentDistance;
